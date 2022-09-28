@@ -40,5 +40,7 @@ b<-unique(lower_a)
 match(lower_a,b)
 #6(c)
 tabulate(match(lower_a,b))
-
+#6(d)
+unique_order<-order(-tabulate(match(lower_a,b)))
+b[unique_order][1:500]
 
