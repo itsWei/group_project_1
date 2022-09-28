@@ -40,5 +40,5 @@ b<-unique(lower_a)
 match(lower_a,b)
 #6(c)
 tabulate(match(lower_a,b))
-#6(d)
+
 
