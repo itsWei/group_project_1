@@ -16,70 +16,25 @@ split_punct <- function (x,a) {
   empty_vec[-i]<-delet_list
 empty_vec
 }
-split_punct(",",a)
+a1<-split_punct(",",a)
 
 #separate the punctuation marks "."
-split_punct <- function (x,a) {
-  punct_loc <- grep(x, a, fixed=TRUE)
-  delet_list <- gsub(x,"", a, fixed=TRUE)
-  empty_vec<-rep("",length(punct_loc)+length(a))
-  i<-punct_loc+1:length(punct_loc)
-  empty_vec[i]<-x
-  empty_vec[-i]<-delet_list
-  empty_vec
-}
-split_punct(".",a)
+a2<-split_punct(".",a1)
 
 #separate the punctuation marks ";"
-split_punct <- function (x,a) {
-  punct_loc <- grep(x, a, fixed=TRUE)
-  delet_list <- gsub(x,"", a, fixed=TRUE)
-  empty_vec<-rep("",length(punct_loc)+length(a))
-  i<-punct_loc+1:length(punct_loc)
-  empty_vec[i]<-x
-  empty_vec[-i]<-delet_list
-  empty_vec
-}
-split_punct(";",a)
+a3<-split_punct(";",a2)
 
 #separate the punctuation marks ":"
-split_punct <- function (x,a) {
-  punct_loc <- grep(x, a, fixed=TRUE)
-  delet_list <- gsub(x,"", a, fixed=TRUE)
-  empty_vec<-rep("",length(punct_loc)+length(a))
-  i<-punct_loc+1:length(punct_loc)
-  empty_vec[i]<-x
-  empty_vec[-i]<-delet_list
-  empty_vec
-}
-split_punct(":",a)
+a4<-split_punct(":",a3)
 
 #separate the punctuation marks "!"
-split_punct <- function (x,a) {
-  punct_loc <- grep(x, a, fixed=TRUE)
-  delet_list <- gsub(x,"", a, fixed=TRUE)
-  empty_vec<-rep("",length(punct_loc)+length(a))
-  i<-punct_loc+1:length(punct_loc)
-  empty_vec[i]<-x
-  empty_vec[-i]<-delet_list
-  empty_vec
-}
-split_punct("!",a)
+a5<-split_punct("!",a4)
 
 #separate the punctuation marks "?"
-split_punct <- function (x,a) {
-  punct_loc <- grep(x, a, fixed=TRUE)
-  delet_list <- gsub(x,"", a, fixed=TRUE)
-  empty_vec<-rep("",length(punct_loc)+length(a))
-  i<-punct_loc+1:length(punct_loc)
-  empty_vec[i]<-x
-  empty_vec[-i]<-delet_list
-  empty_vec
-}
-empty_vec <- split_punct("?",a)
+a6<-empty_vec <- split_punct("?",a5)
 
 #6(a)
-lower_a<-tolower(empty_vec)
+lower_a<-tolower(a6)
 b<-unique(lower_a)
 #6(b)
 match(lower_a,b)
