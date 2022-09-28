@@ -1,2 +1,89 @@
-a <- 4
+setwd("/Users/wangzheng/Desktop/project1/group_project_1")
+a <- scan("pg10.txt",what="character",skip=104) ## skip contents
+n <- length(a)
+a <- a[-((n-2886):n)] ## strip license
+a <- a[-grep("[0123456789]:[0123456789]",a)] ## strip out verse numbers
+
+
+###########################
+#separate the punctuation marks ","
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+empty_vec
+}
+split_punct(",",a)
+
+#separate the punctuation marks "."
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+  empty_vec
+}
+split_punct(".",a)
+
+#separate the punctuation marks ";"
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+  empty_vec
+}
+split_punct(";",a)
+
+#separate the punctuation marks ":"
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+  empty_vec
+}
+split_punct(":",a)
+
+#separate the punctuation marks "!"
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+  empty_vec
+}
+split_punct("!",a)
+
+#separate the punctuation marks "?"
+split_punct <- function (x,a) {
+  punct_loc <- grep(x, a, fixed=TRUE)
+  delet_list <- gsub(x,"", a, fixed=TRUE)
+  empty_vec<-rep("",length(punct_loc)+length(a))
+  i<-punct_loc+1:length(punct_loc)
+  empty_vec[i]<-x
+  empty_vec[-i]<-delet_list
+  empty_vec
+}
+empty_vec <- split_punct("?",a)
+
+#6(a)
+lower_a<-tolower(empty_vec)
+b<-unique(lower_a)
+#6(b)
+match(lower_a,b)
+#6(c)
+tabulate(match(lower_a,b))
+#6(d)
 
