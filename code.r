@@ -14,7 +14,7 @@ split_punct <- function (x,a) {
   i<-punct_loc+1:length(punct_loc)
   empty_vec[i]<-x
   empty_vec[-i]<-delet_list
-empty_vec
+  empty_vec
 }
 a1<-split_punct(",",a)
 
@@ -45,4 +45,9 @@ unique_order<-order(-tabulate(match(lower_a,b)))
 unique_order_m<-unique_order[1:500]
 #6(e)
 b<-b[unique_order_m]
+#7(a)
+d<-match(lower_a,b)
+#7(b)
+matrix<-cbind(d[1:(length(lower_a)-2)],d[1:(length(lower_a)-1)][-1],d[-1][-1])
+
 
