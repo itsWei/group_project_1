@@ -85,6 +85,30 @@ for (i in (1:length(matrix3))){
   matrix_s[matrix3[i]] <- matrix_s[matrix3[i]]+1
 }
 
+first_word_index <- sample(m,1,prob=matrix_s)
+#first_word <- b[first_word_index]
+if (sum(matrix_a[first_word_index,]) == 0){
+  second_word_index <- sample(m,1,prob=matrix_s)
+}else{
+  second_word_index <- sample(m,1,prob=matrix_a[first_word_index,])
+} 
+#words <- cat(c(b[first_word_index],b[second_word_index]))
 
+pairs_index <- rep(0,50)
+pairs_index[1] <- first_word_index
+pairs_index[2] <- second_word_index
+for (i in (3:50)){
+  if (sum(matrix_t[pairs_index[i-2],pairs_index[i-1],]) == 0){
+    if (sum(matrix_a[pairs_index[i-2],]) == 0){
+      pairs_index[i] <- sample(m,1,prob=matrix_s)
+    }else{
+      pairs_index[i] <- sample(m,1,prob=matrix_a[pairs_index[i-2],])
+    }
+  }else{
+    pairs_index[i] <- sample(m,1,prob=matrix_t[pairs_index[i-2],pairs_index[i-1],])
+  }
+}  
+
+words <- cat(b[pairs_index])
 
 
