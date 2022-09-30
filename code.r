@@ -111,4 +111,10 @@ for (i in (3:50)){
 
 words <- cat(b[pairs_index])
 
+#### 9.
 
+new_pairs_index <- rep(0,50)
+for (i in (1:50)){
+  new_pairs_index[i] <- sample(m,1,prob=matrix_s)
+}
+words_from_s <- cat(b[new_pairs_index])
