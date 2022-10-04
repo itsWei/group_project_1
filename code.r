@@ -146,3 +146,44 @@ for (i in (1:50)){
   new_pairs_index[i] <- sample(m,1,prob=S)
 }
 words_from_s <- cat(b[new_pairs_index])
+
+
+## 10.
+upper <- a6[which(is.na(match(a6,lower_a)))] #find the capital word in the main text
+lower_upper_word <- tolower(upper) #change it to lower
+capital_word_index <- which(match(b,unique(lower_upper_word))>0) #find the index of capital word in b
+capital_S <- S[capital_word_index]
+
+first_word_index_new <- capital_word_index[sample(length(capital_S),1,prob=capital_S)]
+first_word <- b[first_word_index_new]
+substr(first_word,1,1) <- toupper(substr(first_word,1,1))
+
+if (sum(A[first_word_index_new,]) == 0){
+  second_word_index_new <- sample(m,1,prob=S)
+}else{
+  second_word_index_new <- sample(m,1,prob=A[first_word_index_new,])
+} 
+
+
+pairs_index_new <- rep(0,50)
+pairs_index_new[1] <- first_word_index_new
+pairs_index_new[2] <- second_word_index_new
+for (i in (3:50)){
+  if (sum(T[pairs_index_new[i-2],pairs_index_new[i-1],]) == 0){
+    if (sum(A[pairs_index_new[i-2],]) == 0){
+      pairs_index_new[i] <- sample(m,1,prob=S)
+    }else{
+      pairs_index_new[i] <- sample(m,1,prob=A[pairs_index_new[i-2],])
+    }
+  }else{
+    pairs_index_new[i] <- sample(m,1,prob=T[pairs_index_new[i-2],pairs_index_new[i-1],])
+  }
+}  
+
+words_new <- cat(first_word,b[pairs_index_new[-1]])
+
+
+
+
+
+
