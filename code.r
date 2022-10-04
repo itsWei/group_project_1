@@ -6,7 +6,7 @@ a <- a[-grep("[0123456789]:[0123456789]",a)] ## strip out verse numbers
 
 
 ###########################
-#4)
+##4
 #separate the punctuation marks ","
 split_punct <- function (x,a) {
   punct_loc <- grep(x, a, fixed=TRUE)
@@ -18,7 +18,7 @@ split_punct <- function (x,a) {
   empty_vec
 }
 
-#5)
+##5
 #separate the punctuation marks ","
 a1 <- split_punct(",",a)
 
@@ -37,6 +37,7 @@ a5 <- split_punct("!",a4)
 #separate the punctuation marks "?"
 a6 <- split_punct("?",a5)
 
+##6
 #6(a)
 #find the vector of unique words
 lower_a<-tolower(a6) #replace capital letters in words with lower case letters
@@ -60,6 +61,7 @@ unique_order_m<-unique_order[1:m] # vector of indicies of the 500 most common wo
 #create the 500 most commonly occurring words
 b<-b[unique_order_m]
 
+##7
 #7(a)
 #find Bible text indicies in the 500 most common words b
 d<-match(lower_a,b)
@@ -110,22 +112,22 @@ for (i in (1:length(matrix3))){
   S[matrix3[i]] <- S[matrix3[i]]+1
 }
 
-#8
+##8
 first_word_index <- sample(m,1,prob=S)
-#first_word <- b[first_word_index]
-if (sum(matrix_a[first_word_index,]) == 0){
+
+if (sum(A[first_word_index,]) == 0){
   second_word_index <- sample(m,1,prob=S)
 }else{
-  second_word_index <- sample(m,1,prob=matrix_a[first_word_index,])
+  second_word_index <- sample(m,1,prob=A[first_word_index,])
 } 
-#words <- cat(c(b[first_word_index],b[second_word_index]))
+
 
 pairs_index <- rep(0,50)
 pairs_index[1] <- first_word_index
 pairs_index[2] <- second_word_index
 for (i in (3:50)){
-  if (sum(matrix_t[pairs_index[i-2],pairs_index[i-1],]) == 0){
-    if (sum(matrix_a[pairs_index[i-2],]) == 0){
+  if (sum(T[pairs_index[i-2],pairs_index[i-1],]) == 0){
+    if (sum(A[pairs_index[i-2],]) == 0){
       pairs_index[i] <- sample(m,1,prob=S)
     }else{
       pairs_index[i] <- sample(m,1,prob=A[pairs_index[i-2],])
@@ -137,8 +139,8 @@ for (i in (3:50)){
 
 words <- cat(b[pairs_index])
 
-#### 9.
-
+##9
+#simulate 50 words with probability is S
 new_pairs_index <- rep(0,50)
 for (i in (1:50)){
   new_pairs_index[i] <- sample(m,1,prob=S)
