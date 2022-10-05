@@ -18,6 +18,7 @@ split_punct <- function (x,a) {
   empty_vec
 }
 
+
 ##5
 #separate the punctuation marks ","
 a1 <- split_punct(",",a)
@@ -36,6 +37,7 @@ a5 <- split_punct("!",a4)
 
 #separate the punctuation marks "?"
 a6 <- split_punct("?",a5)
+
 
 ##6
 #6(a)
@@ -61,6 +63,7 @@ unique_order_m<-unique_order[1:m] # vector of indicies of the 500 most common wo
 #create the 500 most commonly occurring words
 b<-b[unique_order_m]
 
+
 ##7
 #7(a)
 #find Bible text indicies in the 500 most common words b
@@ -78,7 +81,7 @@ nona_row_index<-which(sum_matrix==0) # find the index of row without NA
 matrix<-matrix[nona_row_index,] # set the matrix by droping the row with NA
 
 #7(d)
-#create maritx T 
+#create maritx T
 T<-array(0,dim=c(m,m,m)) # (initialize T) create a zero matrix with dimension of m*m*m
 
 #adding a 1 to T[i,k,j] every time the jth common word follows the pair i,k
@@ -112,32 +115,37 @@ for (i in (1:length(matrix3))){
   S[matrix3[i]] <- S[matrix3[i]]+1
 }
 
-##8
-first_word_index <- sample(m,1,prob=S)
 
-if (sum(A[first_word_index,]) == 0){
-  second_word_index <- sample(m,1,prob=S)
+##8
+#simulate 50 words using full model
+first_word_index <- sample(m,1,prob=S) # find the index of first word 
+
+#find the index of second word
+if (sum(A[first_word_index,]) == 0){ # check if the first word has a following word
+  second_word_index <- sample(m,1,prob=S) # no following word, choose a new word with probability S
 }else{
-  second_word_index <- sample(m,1,prob=A[first_word_index,])
+  second_word_index <- sample(m,1,prob=A[first_word_index,]) # has a following word, choose the next word with probability A
 } 
 
-
+#find the rest of 50 words' indecies
 pairs_index <- rep(0,50)
 pairs_index[1] <- first_word_index
 pairs_index[2] <- second_word_index
 for (i in (3:50)){
-  if (sum(T[pairs_index[i-2],pairs_index[i-1],]) == 0){
-    if (sum(A[pairs_index[i-2],]) == 0){
-      pairs_index[i] <- sample(m,1,prob=S)
-    }else{
-      pairs_index[i] <- sample(m,1,prob=A[pairs_index[i-2],])
+  if (sum(T[pairs_index[i-2],pairs_index[i-1],]) == 0){ 
+    if (sum(A[pairs_index[i-2],]) == 0){ 
+      pairs_index[i] <- sample(m,1,prob=S) 
+    }else{ 
+      pairs_index[i] <- sample(m,1,prob=A[pairs_index[i-2],]) 
     }
   }else{
     pairs_index[i] <- sample(m,1,prob=T[pairs_index[i-2],pairs_index[i-1],])
   }
 }  
 
+#print the 50 words
 words <- cat(b[pairs_index])
+
 
 ##9
 #simulate 50 words with probability is S
@@ -149,38 +157,7 @@ words_from_s <- cat(b[new_pairs_index])
 
 
 ## 10.
-upper <- a6[which(is.na(match(a6,lower_a)))] #find the capital word in the main text
-lower_upper_word <- tolower(upper) #change it to lower
-capital_word_index <- which(match(b,unique(lower_upper_word))>0) #find the index of capital word in b
-capital_S <- S[capital_word_index]
 
-first_word_index_new <- capital_word_index[sample(length(capital_S),1,prob=capital_S)]
-first_word <- b[first_word_index_new]
-substr(first_word,1,1) <- toupper(substr(first_word,1,1))
-
-if (sum(A[first_word_index_new,]) == 0){
-  second_word_index_new <- sample(m,1,prob=S)
-}else{
-  second_word_index_new <- sample(m,1,prob=A[first_word_index_new,])
-} 
-
-
-pairs_index_new <- rep(0,50)
-pairs_index_new[1] <- first_word_index_new
-pairs_index_new[2] <- second_word_index_new
-for (i in (3:50)){
-  if (sum(T[pairs_index_new[i-2],pairs_index_new[i-1],]) == 0){
-    if (sum(A[pairs_index_new[i-2],]) == 0){
-      pairs_index_new[i] <- sample(m,1,prob=S)
-    }else{
-      pairs_index_new[i] <- sample(m,1,prob=A[pairs_index_new[i-2],])
-    }
-  }else{
-    pairs_index_new[i] <- sample(m,1,prob=T[pairs_index_new[i-2],pairs_index_new[i-1],])
-  }
-}  
-
-words_new <- cat(first_word,b[pairs_index_new[-1]])
 
 
 
