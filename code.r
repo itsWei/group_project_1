@@ -157,7 +157,41 @@ words_from_s <- cat(b[new_pairs_index])
 
 
 ## 10.
+upper_words <- a6[which(is.na(match(a6,lower_a)))] #find the capital word in the main text
+lower_upper_words <- tolower(upper_words)
+new_b <- b
+for (i in (1:m)){
+  if (length(which(match(lower_upper_words,b[i])>0)) >= S[i]/2) {
+    substr(new_b[i],1,1) <- toupper(substr(new_b[i],1,1))
+  }
+}
 
+
+first_word_index <- sample(m,1,prob=S)
+
+if (sum(A[first_word_index,]) == 0){
+  second_word_index <- sample(m,1,prob=S)
+}else{
+  second_word_index <- sample(m,1,prob=A[first_word_index,])
+} 
+
+
+pairs_index_ten <- rep(0,50)
+pairs_index_ten[1] <- first_word_index
+pairs_index_ten[2] <- second_word_index
+for (i in (3:50)){
+  if (sum(T[pairs_index_ten[i-2],pairs_index_ten[i-1],]) == 0){
+    if (sum(A[pairs_index_ten[i-2],]) == 0){
+      pairs_index_ten[i] <- sample(m,1,prob=S)
+    }else{
+      pairs_index_ten[i] <- sample(m,1,prob=A[pairs_index_ten[i-2],])
+    }
+  }else{
+    pairs_index_ten[i] <- sample(m,1,prob=T[pairs_index_ten[i-2],pairs_index_ten[i-1],])
+  }
+}  
+
+words_ten <- cat(new_b[pairs_index_ten])
 
 
 
