@@ -5,7 +5,7 @@
 
 ##Contribution
 ##the contribution to this project is roughly equivalent
-##
+##Changliang Wei contributs more in Q10, Simin Wang and Zheng Wang contribute more on the comments
 
 setwd("/Users/wangzheng/Desktop/project1/group_project_1")
 a <- scan("pg10.txt",what="character",skip=104) ## skip contents
