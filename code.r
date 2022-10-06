@@ -1,3 +1,12 @@
+##Group Members:
+##Changliang Wei S2345097
+##Simin Wang S2417531
+##Zheng Wang S2283040
+
+##Contribution
+##the contribution to this project is roughly equivalent
+##
+
 setwd("/Users/wangzheng/Desktop/project1/group_project_1")
 a <- scan("pg10.txt",what="character",skip=104) ## skip contents
 n <- length(a)
